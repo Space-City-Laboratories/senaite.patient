@@ -5,7 +5,7 @@ Changelog
 1.4.0 (unreleased)
 ------------------
 
-- no changes yet
+- #56 Fix unknown timezone error for birthdate in patient listing
 
 
 1.3.0 (2022-10-03)
