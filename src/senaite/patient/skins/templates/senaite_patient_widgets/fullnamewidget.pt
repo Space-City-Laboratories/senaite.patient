@@ -18,7 +18,7 @@
                           fullname_mode python:entry_mode in ['full', 'fullname'];">
         <tal:with_value tal:condition="value">
           <span tal:condition="not:fullname_mode"
-                tal:content="python: view_format % value"/>
+                tal:content="python: view_format % value if 'middlename' in value else '%(firstname)s %(lastname)s' % value "/>
           <span tal:condition="fullname_mode"
                 tal:content="fullname"/>
         </tal:with_value>
