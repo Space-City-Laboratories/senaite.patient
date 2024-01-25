@@ -193,10 +193,7 @@ class PatientFolderView(ListingView):
         item["gender"] = obj.getGenderText()
 
         # Birthdate
-        birthdate = obj.getBirthdate()
-        # birthdate is a datetime.date object
-        birthdate = dtime.to_DT(birthdate)
-        item["birthdate"] = dtime.to_localized_time(birthdate)
+        item["birthdate"] = obj.getLocalizedBirthdate()
 
         # Folder
         parent = api.get_parent(obj)
