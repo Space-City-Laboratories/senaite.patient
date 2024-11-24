@@ -64,6 +64,30 @@ from .schema import IRaceSchema
 POSSIBLE_ADDRESSES = [OTHER_ADDRESS, PHYSICAL_ADDRESS, POSTAL_ADDRESS]
 
 
+from App.class_init import InitializeClass
+from Products.Archetypes.Registry import registerWidget
+class CustomDateTimeWidget(DatetimeWidget):
+    """Custom widget for date and time fields"""
+
+    security = ClassSecurityInfo()
+
+    def get_display_value(self):
+        """Returns the localized date value
+        """
+        value = self.value
+        return value
+
+InitializeClass(CustomDateTimeWidget)
+
+# Register the custom widget
+registerWidget(
+    CustomDateTimeWidget,
+    title="Custom DateTimeWidget",
+    description="Custom widget for date and time fields",
+    used_for=("Products.Archetypes.Field.DateTimeField",)
+)
+
+
 class IPatientSchema(model.Schema):
     """Patient Content
     """
@@ -295,7 +319,7 @@ class IPatientSchema(model.Schema):
     )
 
     directives.widget("birthdate",
-                      DatetimeWidget,
+                      CustomDateTimeWidget,
                       max="current",
                       show_time=False)
     birthdate = DatetimeField(
