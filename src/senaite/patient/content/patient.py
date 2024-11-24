@@ -717,15 +717,14 @@ class Patient(Container):
         value = accessor(self)
         # Return a plain date object to avoid timezone issues
         if dtime.is_dt(value) and as_date:
-            value = value.date()
+            value = value.date().strftime('%Y-%m-%d')
         return value
 
     @security.protected(permissions.View)
     def getLocalizedBirthdate(self):
         """Returns the birthday with the field accessor
         """
-        birthdate = dtime.to_DT(self.getBirthdate())
-        return dtime.to_localized_time(birthdate)
+        return self.getBirthdate()
 
     @security.protected(permissions.ModifyPortalContent)
     def setBirthdate(self, value):
